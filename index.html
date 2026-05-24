@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alves & Parente Advogados — Natal/RN</title>
+    <meta name="description" content="Escritório de advocacia em Natal/RN com atendimento 100% digital para todo o Brasil. Direito de Família, Trabalho, Penal e Consumidor.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: '#2F3B2E',
+                        copper: '#B8734A',
+                        sand: '#E7DED2',
+                        'sand-deep': '#DCD2C2',
+                        'ink-soft': '#4A5748',
+                        'ink-mute': '#7A8477'
+                    },
+                    fontFamily: {
+                        display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        body: ['"DM Sans"', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        :root {
+            --ink: #2F3B2E;
+            --copper: #B8734A;
+            --sand: #E7DED2;
+            --sand-deep: #DCD2C2;
+            --ink-soft: #4A5748;
+            --ink-mute: #7A8477;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', system-ui, sans-serif;
+            background: var(--sand);
+            color: var(--ink);
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            overflow-x: hidden;
+        }
+
+        /* Grain Overlay */
+        .grain::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+            mix-blend-mode: multiply;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: var(--ink);
+            color: var(--sand);
+            font-weight: 500;
+            font-size: 0.875rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--copper);
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 0;
+        }
+
+        .btn-primary:hover::before {
+            transform: translateY(0);
+        }
+
+        .btn-primary > span, .btn-primary > i {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(47, 59, 46, 0.3);
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            border: 1px solid var(--ink);
+            color: var(--ink);
+            font-weight: 500;
+            font-size: 0.875rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background: var(--ink);
+            color: var(--sand);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(47, 59, 46, 0.2);
+        }
+
+        .nav-link {
+            position: relative;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink);
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: var(--copper);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* Practice Area Row Hover */
+        .practice-row {
+            border-top: 1px solid rgba(47, 59, 46, 0.15);
+            transition: background-color 0.4s ease;
+        }
+
+        .practice-row:last-child {
+            border-bottom: 1px solid rgba(47, 59, 46, 0.15);
+        }
+
+        .practice-row:hover {
+            background-color: rgba(47, 59, 46, 0.03);
+        }
+
+        .practice-row .arrow-icon {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .practice-row:hover .arrow-icon {
+            transform: translateX(8px);
+            color: var(--copper);
+        }
+
+        .practice-row .title-text {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .practice-row:hover .title-text {
+            transform: translateX(8px);
+        }
+
+        /* Glassmorphism Header */
+        .header-scrolled {
+            background: rgba(231, 222, 210, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(47, 59, 46, 0.1);
+        }
+
+        /* Floating WhatsApp Button */
+        .floating-wa {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 50;
+            width: 3.5rem;
+            height: 3.5rem;
+            background-color: var(--ink);
+            color: var(--sand);
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px -5px rgba(47, 59, 46, 0.4);
+            transition: all 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(20px);
+        }
+
+        .floating-wa.show {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .floating-wa:hover {
+            background-color: var(--copper);
+            transform: translateY(-4px) scale(1.05);
+        }
+
+        .floating-wa::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 9999px;
+            border: 1px solid var(--copper);
+            opacity: 0;
+            animation: pulse-wa 2.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes pulse-wa {
+            0% { transform: scale(0.95); opacity: 0.5; }
+            70% { transform: scale(1.2); opacity: 0; }
+            100% { transform: scale(1.2); opacity: 0; }
+        }
+
+        /* Partners images hover effect */
+        .partner-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+        }
+
+        .partner-img-wrapper img {
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: grayscale(20%) contrast(1.1);
+        }
+
+        .partner-img-wrapper:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0%) contrast(1.1);
+        }
+
+        /* Reveal utility for GSAP */
+        .gsap-reveal {
+            opacity: 0;
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body class="grain">
+
+    <!-- Header -->
+    <header id="header" class="fixed w-full top-0 z-40 transition-all duration-300 py-4">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex justify-between items-center">
+            <a href="#" class="block z-50">
+                <img src="assets/logo.png" alt="Alves & Parente Advogados" class="h-10 md:h-12 w-auto object-contain">
+            </a>
+
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#atuacao" class="nav-link">Áreas de Atuação</a>
+                <a href="#socios" class="nav-link">Sócios</a>
+                <a href="#digital" class="nav-link">Atendimento Digital</a>
+                <a href="#metodo" class="nav-link">Método</a>
+                <a href="#contato" class="btn-outline border-ink text-ink text-xs px-6 py-2">Contato</a>
+            </nav>
+
+            <!-- Mobile Menu Toggle (Decorative for now, would need JS to function) -->
+            <button class="md:hidden text-ink z-50 flex items-center justify-center p-2">
+                <i class="ph ph-list text-2xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-24 pb-12 px-6 lg:px-12 overflow-hidden">
+        <!-- Subtle Background Elements -->
+        <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-sand-deep rounded-full opacity-30 blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-copper rounded-full opacity-10 blur-3xl translate-y-1/3 -translate-x-1/4 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+            <div class="lg:col-span-8 flex flex-col justify-center">
+                <span class="gsap-reveal hero-item text-copper uppercase tracking-[0.2em] text-sm font-medium mb-6 block">
+                    Escritório Boutique · Natal — RN
+                </span>
+
+                <h1 class="gsap-reveal hero-item font-display text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight text-ink mb-8">
+                    Soluções jurídicas <br>
+                    <span class="italic font-light text-copper">estratégicas.</span>
+                </h1>
+
+                <p class="gsap-reveal hero-item text-lg md:text-xl text-ink-soft max-w-2xl mb-10 leading-relaxed font-light">
+                    Atuação técnica e personalizada em Direito de Família, Trabalho, Penal e Consumidor. Atendimento 100% digital para todo o Brasil.
+                </p>
+
+                <div class="gsap-reveal hero-item flex flex-wrap gap-4 items-center">
+                    <a href="https://wa.me/5584994166312?text=Olá, preciso de ajuda jurídica" target="_blank" class="btn-primary">
+                        <span>Preciso de ajuda</span>
+                        <i class="ph ph-arrow-right text-lg"></i>
+                    </a>
+                    <a href="#atuacao" class="btn-outline">
+                        <span>Áreas de atuação</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-4 hidden lg:block">
+                <!-- Aesthetic Composition -->
+                <div class="gsap-reveal hero-img relative w-full h-[600px] rounded-t-full border border-ink/10 overflow-hidden flex items-end justify-center pb-12 bg-sand-deep/40 backdrop-blur-sm">
+                    <div class="text-center">
+                        <img src="assets/logo.png" alt="Logo Mark" class="w-24 opacity-20 mb-8 mx-auto filter grayscale">
+                        <div class="flex flex-col gap-6 text-ink/40 text-sm font-medium tracking-[0.2em] uppercase">
+                            <span>01 — Diagnóstico Jurídico</span>
+                            <span>02 — Estratégia & Risco</span>
+                            <span>03 — Execução Processual</span>
+                            <span>04 — 100% Digital</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Manifesto Section -->
+    <section class="py-24 px-6 lg:px-12 bg-sand-deep/20 relative">
+        <div class="max-w-4xl mx-auto text-center">
+            <span class="gsap-scroll uppercase tracking-[0.2em] text-copper text-xs font-medium mb-8 block">— Manifesto</span>
+            <p class="gsap-scroll font-display text-3xl md:text-5xl leading-tight text-ink font-light">
+                Acreditamos que advocacia de excelência é, antes de tudo, <span class="italic text-copper">clareza</span>.
+                Clareza no diagnóstico, no caminho proposto e nas consequências de cada decisão.
+                É essa transparência técnica que transforma processos em decisões e decisões em resultados.
+            </p>
+        </div>
+    </section>
+
+    <!-- Areas de Atuacao Section -->
+    <section id="atuacao" class="py-32 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                <div class="lg:col-span-4">
+                    <div class="sticky top-32">
+                        <span class="gsap-scroll uppercase tracking-[0.2em] text-copper text-xs font-medium mb-6 block">— Áreas de Atuação</span>
+                        <h2 class="gsap-scroll font-display text-4xl md:text-5xl leading-tight text-ink mb-6">
+                            Quatro frentes,<br>um único padrão de excelência.
+                        </h2>
+                        <a href="https://wa.me/5584994166312?text=Olá, preciso de ajuda" target="_blank" class="gsap-scroll btn-outline mt-4 hidden lg:inline-flex">
+                            <span>Falar com advogado</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-8 flex flex-col pt-8 lg:pt-0">
+                    <!-- Area 1 -->
+                    <a href="https://wa.me/5584994166312?text=Preciso de ajuda em Direito de Família" target="_blank" class="practice-row gsap-scroll group py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 cursor-pointer">
+                        <div class="flex items-center gap-8 md:w-1/2">
+                            <span class="text-copper/50 font-display italic text-2xl font-light group-hover:text-copper transition-colors duration-300">01</span>
+                            <h3 class="title-text text-2xl md:text-3xl font-display text-ink">Direito de Família e Sucessões</h3>
+                        </div>
+                        <div class="md:w-1/2 flex items-center justify-between">
+                            <p class="text-ink-soft font-light text-sm leading-relaxed max-w-sm">
+                                Divórcios, guarda, partilha, inventários e planejamento sucessório com sensibilidade humana e rigor patrimonial.
+                            </p>
+                            <i class="ph ph-arrow-right arrow-icon text-ink text-2xl ml-4 hidden md:block"></i>
+                        </div>
+                    </a>
+
+                    <!-- Area 2 -->
+                    <a href="https://wa.me/5584994166312?text=Preciso de ajuda em Direito do Trabalho" target="_blank" class="practice-row gsap-scroll group py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 cursor-pointer">
+                        <div class="flex items-center gap-8 md:w-1/2">
+                            <span class="text-copper/50 font-display italic text-2xl font-light group-hover:text-copper transition-colors duration-300">02</span>
+                            <h3 class="title-text text-2xl md:text-3xl font-display text-ink">Direito do Trabalho</h3>
+                        </div>
+                        <div class="md:w-1/2 flex items-center justify-between">
+                            <p class="text-ink-soft font-light text-sm leading-relaxed max-w-sm">
+                                Defesa de empregados e empresas em rescisões, verbas indenizatórias, assédio e contencioso trabalhista de alta complexidade.
+                            </p>
+                            <i class="ph ph-arrow-right arrow-icon text-ink text-2xl ml-4 hidden md:block"></i>
+                        </div>
+                    </a>
+
+                    <!-- Area 3 -->
+                    <a href="https://wa.me/5584994166312?text=Preciso de ajuda em Direito Penal" target="_blank" class="practice-row gsap-scroll group py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 cursor-pointer">
+                        <div class="flex items-center gap-8 md:w-1/2">
+                            <span class="text-copper/50 font-display italic text-2xl font-light group-hover:text-copper transition-colors duration-300">03</span>
+                            <h3 class="title-text text-2xl md:text-3xl font-display text-ink">Direito Penal</h3>
+                        </div>
+                        <div class="md:w-1/2 flex items-center justify-between">
+                            <p class="text-ink-soft font-light text-sm leading-relaxed max-w-sm">
+                                Defesa criminal técnica e discreta — da fase investigativa ao tribunal — com pronto atendimento em situações de urgência.
+                            </p>
+                            <i class="ph ph-arrow-right arrow-icon text-ink text-2xl ml-4 hidden md:block"></i>
+                        </div>
+                    </a>
+
+                    <!-- Area 4 -->
+                    <a href="https://wa.me/5584994166312?text=Preciso de ajuda em Direito do Consumidor" target="_blank" class="practice-row gsap-scroll group py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 cursor-pointer">
+                        <div class="flex items-center gap-8 md:w-1/2">
+                            <span class="text-copper/50 font-display italic text-2xl font-light group-hover:text-copper transition-colors duration-300">04</span>
+                            <h3 class="title-text text-2xl md:text-3xl font-display text-ink">Direito do Consumidor</h3>
+                        </div>
+                        <div class="md:w-1/2 flex items-center justify-between">
+                            <p class="text-ink-soft font-light text-sm leading-relaxed max-w-sm">
+                                Cobranças indevidas, falhas em serviços, planos de saúde, transporte aéreo e relações de consumo com instituições financeiras.
+                            </p>
+                            <i class="ph ph-arrow-right arrow-icon text-ink text-2xl ml-4 hidden md:block"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Socios Section -->
+    <section id="socios" class="py-32 px-6 lg:px-12 bg-ink text-sand">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-24">
+                <span class="gsap-scroll uppercase tracking-[0.2em] text-copper text-xs font-medium mb-6 block">— Os Sócios</span>
+                <h2 class="gsap-scroll font-display text-4xl md:text-5xl leading-tight text-sand">
+                    Atuação a quatro mãos.<br>
+                    <span class="italic text-copper">Decisão pessoal, técnica conjunta.</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+                <!-- Deyvid -->
+                <div class="gsap-scroll group">
+                    <div class="partner-img-wrapper mb-8 aspect-[3/4] md:aspect-[4/5] w-full max-w-md mx-auto lg:max-w-none">
+                        <img src="assets/deyvid.jpg" alt="Deyvid Alves" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="max-w-md mx-auto lg:max-w-none">
+                        <div class="flex items-end justify-between mb-6 pb-6 border-b border-sand/20">
+                            <div>
+                                <span class="text-copper uppercase tracking-[0.2em] text-xs font-medium mb-2 block">Sócio Fundador</span>
+                                <h3 class="font-display text-4xl text-sand">Deyvid Alves</h3>
+                            </div>
+                            <span class="text-sand/60 text-sm font-light">OAB/RN 23.486</span>
+                        </div>
+                        <p class="text-sand/80 font-light leading-relaxed mb-8">
+                            Atuação técnica orientada à resolução estratégica de conflitos, com foco em Direito de Família e Sucessões e Direito do Consumidor. Combina sensibilidade no trato das relações familiares com rigor na defesa de direitos patrimoniais e consumeristas.
+                            <br><br>
+                            Defende a ideia de que cada causa deve ser conduzida com a precisão de um projeto: diagnóstico, plano e métricas claras de progresso.
+                        </p>
+                        <div class="flex items-center gap-8">
+                            <div>
+                                <span class="text-sand/40 uppercase tracking-[0.1em] text-[10px] block mb-1">Frente principal</span>
+                                <span class="text-sm">Família & Consumidor</span>
+                            </div>
+                            <div>
+                                <span class="text-sand/40 uppercase tracking-[0.1em] text-[10px] block mb-1">Atendimento</span>
+                                <span class="text-sm">Personalizado</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vitoria -->
+                <div class="gsap-scroll group lg:mt-32">
+                    <div class="partner-img-wrapper mb-8 aspect-[3/4] md:aspect-[4/5] w-full max-w-md mx-auto lg:max-w-none">
+                        <img src="assets/vitoria.jpg" alt="Vitória Parente" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="max-w-md mx-auto lg:max-w-none">
+                        <div class="flex items-end justify-between mb-6 pb-6 border-b border-sand/20">
+                            <div>
+                                <span class="text-copper uppercase tracking-[0.2em] text-xs font-medium mb-2 block">Sócia Fundadora</span>
+                                <h3 class="font-display text-4xl text-sand">Vitória Parente</h3>
+                            </div>
+                            <span class="text-sand/60 text-sm font-light">OAB/RN 23.479</span>
+                        </div>
+                        <p class="text-sand/80 font-light leading-relaxed mb-8">
+                            Especializada em Direito do Trabalho e Direito Penal, conduz casos com método analítico e foco em previsibilidade processual — com clareza pedagógica para o cliente em cada etapa.
+                            <br><br>
+                            Sua atuação combina defesa contenciosa firme com resposta rápida em situações de urgência, especialmente na esfera criminal.
+                        </p>
+                        <div class="flex items-center gap-8">
+                            <div>
+                                <span class="text-sand/40 uppercase tracking-[0.1em] text-[10px] block mb-1">Frente principal</span>
+                                <span class="text-sm">Trabalho & Penal</span>
+                            </div>
+                            <div>
+                                <span class="text-sand/40 uppercase tracking-[0.1em] text-[10px] block mb-1">Método</span>
+                                <span class="text-sm">Analítico</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 100% Digital Section -->
+    <section id="digital" class="py-32 px-6 lg:px-12 bg-sand">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+                <div class="order-2 lg:order-1">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
+                        <div class="gsap-scroll">
+                            <i class="ph ph-video-camera text-copper text-3xl mb-4 block"></i>
+                            <h4 class="font-display text-xl text-ink mb-3">Atendimento imediato</h4>
+                            <p class="text-ink-soft font-light text-sm leading-relaxed">Consultas e reuniões por videoconferência. Você não precisa se deslocar para receber orientação jurídica de qualidade.</p>
+                        </div>
+                        <div class="gsap-scroll">
+                            <i class="ph ph-map-pin text-copper text-3xl mb-4 block"></i>
+                            <h4 class="font-display text-xl text-ink mb-3">Todo o Brasil</h4>
+                            <p class="text-ink-soft font-light text-sm leading-relaxed">Atendemos clientes em qualquer estado brasileiro. Processos podem ser acompanhados e conduzidos remotamente em todas as nossas áreas de atuação.</p>
+                        </div>
+                        <div class="gsap-scroll md:col-span-2">
+                            <i class="ph ph-shield-check text-copper text-3xl mb-4 block"></i>
+                            <h4 class="font-display text-xl text-ink mb-3">Segurança & agilidade</h4>
+                            <p class="text-ink-soft font-light text-sm leading-relaxed">Documentos assinados digitalmente, protocolos eletrônicos e acompanhamento de processos em tempo real. Tudo na palma da sua mão.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2 lg:pl-12">
+                    <span class="gsap-scroll uppercase tracking-[0.2em] text-copper text-xs font-medium mb-6 block">— 100% Digital</span>
+                    <h2 class="gsap-scroll font-display text-4xl md:text-5xl leading-tight text-ink mb-12">
+                        Onde você estiver,<br>
+                        <span class="italic text-copper">estamos com você.</span>
+                    </h2>
+
+                    <div class="grid grid-cols-2 gap-8 border-t border-ink/10 pt-10">
+                        <div class="gsap-scroll">
+                            <span class="font-display text-4xl text-ink block mb-2">100%</span>
+                            <span class="text-xs uppercase tracking-[0.1em] text-ink-soft">Digital & seguro</span>
+                        </div>
+                        <div class="gsap-scroll">
+                            <span class="font-display text-4xl text-ink block mb-2">24h</span>
+                            <span class="text-xs uppercase tracking-[0.1em] text-ink-soft">Resposta em urgências</span>
+                        </div>
+                        <div class="gsap-scroll">
+                            <span class="font-display text-4xl text-ink block mb-2">27<span class="text-2xl">UF</span></span>
+                            <span class="text-xs uppercase tracking-[0.1em] text-ink-soft">Cobertura nacional</span>
+                        </div>
+                        <div class="gsap-scroll">
+                            <span class="font-display text-4xl text-ink block mb-2">04.</span>
+                            <span class="text-xs uppercase tracking-[0.1em] text-ink-soft">Áreas de atuação</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Separator -->
+    <section class="py-24 px-6 lg:px-12 bg-copper text-sand text-center relative overflow-hidden">
+        <!-- Subtle grain for this section only to avoid conflicts -->
+        <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%223%22 stitchTiles=%22stitch%22/></filter><rect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/></svg>')] mix-blend-multiply pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto relative z-10">
+            <span class="text-sand/30 font-display text-8xl leading-none block mb-[-2rem]">"</span>
+            <p class="gsap-scroll font-display text-3xl md:text-5xl leading-tight mb-8">
+                O nosso compromisso é traduzir o complexo em decisões claras — e transformar a melhor decisão no melhor resultado possível.
+            </p>
+            <span class="gsap-scroll uppercase tracking-[0.2em] text-xs font-medium opacity-80">Alves & Parente</span>
+        </div>
+    </section>
+
+    <!-- Metodo Section -->
+    <section id="metodo" class="py-32 px-6 lg:px-12 bg-sand-deep/30">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-24">
+                <span class="gsap-scroll uppercase tracking-[0.2em] text-copper text-xs font-medium mb-6 block">— O Método</span>
+                <h2 class="gsap-scroll font-display text-4xl md:text-5xl leading-tight text-ink">
+                    Quatro pilares que sustentam<br>
+                    <span class="italic text-copper">cada projeto jurídico.</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Step 1 -->
+                <div class="gsap-scroll bg-sand p-10 rounded-lg border border-ink/5 hover:border-copper/30 transition-colors duration-300">
+                    <span class="text-copper/40 font-display italic text-3xl mb-6 block">01</span>
+                    <h4 class="font-display text-xl text-ink mb-4">Agilidade com método</h4>
+                    <p class="text-ink-soft font-light text-sm leading-relaxed">
+                        Respostas rápidas em urgência, sustentadas por protocolos internos de triagem e análise.
+                    </p>
+                </div>
+                <!-- Step 2 -->
+                <div class="gsap-scroll bg-sand p-10 rounded-lg border border-ink/5 hover:border-copper/30 transition-colors duration-300">
+                    <span class="text-copper/40 font-display italic text-3xl mb-6 block">02</span>
+                    <h4 class="font-display text-xl text-ink mb-4">Segurança jurídica</h4>
+                    <p class="text-ink-soft font-light text-sm leading-relaxed">
+                        Pareceres técnicos, contratos preventivos e gestão de risco antes do litígio.
+                    </p>
+                </div>
+                <!-- Step 3 -->
+                <div class="gsap-scroll bg-sand p-10 rounded-lg border border-ink/5 hover:border-copper/30 transition-colors duration-300">
+                    <span class="text-copper/40 font-display italic text-3xl mb-6 block">03</span>
+                    <h4 class="font-display text-xl text-ink mb-4">Tecnologia aplicada</h4>
+                    <p class="text-ink-soft font-light text-sm leading-relaxed">
+                        Acompanhamento digital, prazos monitorados e relatórios periódicos ao cliente.
+                    </p>
+                </div>
+                <!-- Step 4 -->
+                <div class="gsap-scroll bg-sand p-10 rounded-lg border border-ink/5 hover:border-copper/30 transition-colors duration-300">
+                    <span class="text-copper/40 font-display italic text-3xl mb-6 block">04</span>
+                    <h4 class="font-display text-xl text-ink mb-4">Atendimento boutique</h4>
+                    <p class="text-ink-soft font-light text-sm leading-relaxed">
+                        Carteira limitada por sócio. Você fala com quem conduz o seu caso.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato / Footer -->
+    <footer id="contato" class="bg-ink text-sand pt-32 pb-12 px-6 lg:px-12 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <!-- CTA Block -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-32 border-b border-sand/20 pb-32">
+                <div>
+                    <span class="gsap-scroll uppercase tracking-[0.2em] text-copper text-xs font-medium mb-6 block">— Próximo passo</span>
+                    <h2 class="gsap-scroll font-display text-5xl md:text-7xl leading-tight text-sand mb-8">
+                        Conte o seu caso.<br>
+                        <span class="italic font-light text-copper">Devolveremos um caminho.</span>
+                    </h2>
+                    <p class="gsap-scroll text-sand/70 font-light text-lg max-w-md mb-10">
+                        A primeira conversa é estratégica e confidencial. Avaliamos a viabilidade, o tempo estimado e o custo antes de qualquer decisão.
+                    </p>
+                    <div class="gsap-scroll flex flex-wrap gap-4">
+                        <a href="https://wa.me/5584994166312?text=Olá, preciso de ajuda jurídica" target="_blank" class="btn-primary !bg-copper !text-sand hover:!bg-sand hover:!text-ink before:hidden transition-colors">
+                            <span>Preciso de ajuda</span>
+                            <i class="ph ph-whatsapp-logo text-lg"></i>
+                        </a>
+                        <a href="mailto:alveseparenteadvogadosassociados@gmail.com" class="btn-outline !border-sand !text-sand hover:!bg-sand hover:!text-ink">
+                            <span>Enviar e-mail</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-12 lg:pl-16 pt-8 lg:pt-0">
+                    <div class="gsap-scroll">
+                        <h5 class="text-copper uppercase tracking-[0.2em] text-[10px] font-medium mb-6">Contato</h5>
+                        <ul class="space-y-6">
+                            <li>
+                                <a href="https://wa.me/5584994166312" target="_blank" class="flex items-center gap-4 text-sand/80 hover:text-copper transition-colors">
+                                    <i class="ph ph-whatsapp-logo text-xl"></i>
+                                    <span class="font-light">(84) 99416-6312</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="mailto:alveseparenteadvogadosassociados@gmail.com" class="flex items-center gap-4 text-sand/80 hover:text-copper transition-colors">
+                                    <i class="ph ph-envelope-simple text-xl"></i>
+                                    <span class="font-light text-sm">E-mail do Escritório</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://instagram.com/alveseparenteadvogados" target="_blank" class="flex items-center gap-4 text-sand/80 hover:text-copper transition-colors">
+                                    <i class="ph ph-instagram-logo text-xl"></i>
+                                    <span class="font-light">@alveseparenteadvogados</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="gsap-scroll">
+                        <h5 class="text-copper uppercase tracking-[0.2em] text-[10px] font-medium mb-6">Horário</h5>
+                        <ul class="space-y-6">
+                            <li class="text-sand/80 font-light flex gap-4">
+                                <i class="ph ph-clock text-xl"></i>
+                                <span>Seg. — Sex. · 09h às 18h<br><span class="text-copper text-sm mt-1 block">Plantão para urgências penais</span></span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="gsap-scroll sm:col-span-2">
+                        <h5 class="text-copper uppercase tracking-[0.2em] text-[10px] font-medium mb-6">Sócios</h5>
+                        <ul class="space-y-3">
+                            <li class="text-sand/80 font-light text-sm">Deyvid Alves — OAB/RN 23.486</li>
+                            <li class="text-sand/80 font-light text-sm">Vitória Parente — OAB/RN 23.479</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8 text-sand/50 text-xs font-light">
+                <div class="flex items-center gap-6">
+                    <img src="assets/logo.png" alt="Logo" class="h-6 w-auto opacity-30 filter brightness-0 invert">
+                    <span>© 2026 · Alves & Parente Advogados</span>
+                </div>
+                <div class="flex gap-6">
+                    <span>Sociedade de advogados · OAB/RN</span>
+                    <span>Publicidade meramente informativa — Provimento 205/2021 CFOAB.</span>
+                </div>
+                <a href="#" class="text-copper hover:text-sand transition-colors uppercase tracking-widest">Topo ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/5584994166312?text=Olá, preciso de ajuda jurídica" target="_blank" id="floating-wa" class="floating-wa" aria-label="WhatsApp">
+        <i class="ph ph-whatsapp-logo text-3xl"></i>
+    </a>
+
+    <script>
+        // Header and Floating WA Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            const floatingWa = document.getElementById('floating-wa');
+
+            if (window.scrollY > 50) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+
+            // Show floating WA button after scrolling down
+            if (window.scrollY > 300) {
+                floatingWa.classList.add('show');
+            } else {
+                floatingWa.classList.remove('show');
+            }
+        });
+
+        // Init GSAP ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Scroll Animations
+        gsap.utils.toArray('.gsap-scroll').forEach(element => {
+            gsap.fromTo(element,
+                { y: 30, opacity: 0 },
+                {
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    },
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                    ease: "power3.out"
+                }
+            );
+        });
+
+        // Hero Animations
+        gsap.to(".hero-item", {
+            y: 0,
+            opacity: 1,
+            autoAlpha: 1,
+            duration: 1.2,
+            stagger: 0.15,
+            ease: "power3.out",
+            delay: 0.2
+        });
+
+        gsap.to(".hero-img", {
+            y: 0,
+            opacity: 1,
+            autoAlpha: 1,
+            duration: 1.5,
+            ease: "power3.out",
+            delay: 0.4
+        });
+    </script>
+</body>
+</html>
