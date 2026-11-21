@@ -12,7 +12,7 @@ Estas regras valem para qualquer sessão futura. Ler antes de mexer.
 - Se um recurso não tem solução viável, ele prefere remover a deixar vazio ou quebrado.
 
 ## 2. Produto e posicionamento
-- Curso independente para vender. Citar "HU Brasil (ex-Ebserh)" só em texto, sem "ex-Ebserh" no cabeçalho.
+- (Superado em 21/11/2026: uso pessoal, sem venda.) Citar "HU Brasil (ex-Ebserh)" só em texto, sem "ex-Ebserh" no cabeçalho.
 - Não usar logotipo oficial HU Brasil, FGV ou marcas de terceiros.
 - Paleta verde pastel (enfermagem), Plus Jakarta Sans (títulos) e Figtree (texto). Manter a paleta em todo redesign.
 - Aspecto profissional, fluido, sem "cara de IA". Sem fonte mono em rótulos. Sem selo de "salvo na conta".
@@ -31,10 +31,12 @@ Estas regras valem para qualquer sessão futura. Ler antes de mexer.
 - Alternativas têm tesoura para cortar. Simulado com 80% ou mais de acertos: confete e selo (respeita "reduzir movimento").
 - Questão com sublinhado, destaque, sobrescrito ou imagem NUNCA é excluída: preservar a marcação (ver seção 5).
 
-## 4. Direitos autorais (não negociável)
-- Não importar conteúdo de cursos comerciais (Rômulo Passos/Brasileiro & Passos, Mentoria IBFC etc.).
-- Cadernos TEC enviados pelo Romero (questões reais de provas públicas) podem ser importados. Confirmar uso comercial com o TEC antes de vender.
-- YouTube não toca dentro do artefato (CSP bloqueia iframes e mídia externa). Só vídeo MP4 próprio (até 15 MB) ou botão que abre outra aba.
+## 4. Uso e direitos autorais
+- DECISÃO DO ROMERO (21/11/2026): desistiu de comercializar. A plataforma é só de uso pessoal. Regras de venda (marca, logo, selo FGV,
+  aviso de curso independente) deixam de ser obrigatórias, mas não inventar vínculo oficial com a HU Brasil ou a FGV.
+- Não redistribuir: se um dia compartilhar com outras pessoas, voltar a tratar direitos autorais dos cadernos TEC e de cursos comerciais.
+- Limite técnico, não de política: o artefato roda em sandbox da claude.ai e bloqueia iframes, vídeo e imagem externos (YouTube não toca
+  dentro). Só vídeo MP4 próprio (até 15 MB) toca na página. O vídeo-resumo animado com narração (TTS) cobre isso.
 - Aulas e comentários são autorais com apoio de IA e SEM revisão clínica externa. Avisar isso sempre que relevante.
 
 ## 5. Pipeline técnico (arquivo único `index.html`, ~340 KB)
