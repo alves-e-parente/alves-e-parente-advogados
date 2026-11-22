@@ -29,7 +29,8 @@ Estas regras valem para qualquer sessão futura. Ler antes de mexer.
   dica de prova), até ~230 palavras. Vale para todo lugar com IA.
 - Recordação ativa por mapa mental visual, não por texto digitado.
 - Alternativas têm tesoura para cortar. Simulado com 80% ou mais de acertos: confete e selo (respeita "reduzir movimento").
-- Questão com sublinhado, destaque, sobrescrito ou imagem NUNCA é excluída: preservar a marcação (ver seção 5).
+- Questão com sublinhado, destaque, sobrescrito ou imagem NUNCA é excluída: preservar a marcação (ver seção 5). Ao reimportar, também recuperar as que foram excluídas antes: imagens e marcações entram por `tecK/patch.json` (`{tid:{img,s,o}}`), sem mudar ids.
+- Material complementar de curso (Missão Aprovação 2027): vira "Julgue os itens" (campo `jg` nas aulas, docs `aulas/jg1`, `jg2`). Os gabaritos do PDF vinham em branco; os veredictos e as correções são de autoria do Claude e só entram quando há confiança. Itens baseados em atualizações de 2026 que não dá para verificar ficam de fora.
 
 ## 4. Uso e direitos autorais
 - DECISÃO DO ROMERO (21/11/2026): desistiu de comercializar. A plataforma é só de uso pessoal. Regras de venda (marca, logo, selo FGV,
@@ -63,6 +64,7 @@ Estas regras valem para qualquer sessão futura. Ler antes de mexer.
 - Backup antes de editar (`index.vNN.bak`). Responder a thread depois de publicar.
 
 ## 7. Pendências conhecidas
+- Julgue os itens: capítulos 23 a 26 (urgências 2026, HAS 2025, isolamento, notificação) e PNH/PNAB não foram processados. Itens sem confiança foram pulados.
 - 703 questões reais recentes (240 + 463) sem comentário escrito (botão "Explicar por IA" cobre).
 - Esquemas curados em 21 assuntos; o resto usa o botão de IA.
 - Revisão clínica externa de aulas, comentários e autorais; arquivos MP4 dos vídeos; mais cadernos TEC (Português FGV).
