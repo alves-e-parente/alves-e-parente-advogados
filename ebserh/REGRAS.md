@@ -34,6 +34,10 @@ Estas regras valem para qualquer sessão futura. Ler antes de mexer.
 
 - Raio-X da banca (após responder): tipo de comando, palavras absolutas, dados reais do banco (posição do gabarito equilibrada; absoluta certa ~15% vs acaso 20%; mais longa ~24%) e, por IA, o tipo de pegadinha de cada alternativa errada. Conta no navegador quais pegadinhas mais enganam o Romero. Não vender como "hack": os sinais estatísticos são fracos.
 
+- Enunciados organizados (regra obrigatória em toda importação): nenhuma questão entra como bloco corrido. `ebserh/tools/stemfmt.js` (`fmtStem`, `fmtOpt`) roda no fim do `build2.js` e separa: contexto, texto-base, itens e comando final.
+  Convenções do campo `s`: `\n` quebra de linha; `\n\n` novo parágrafo; `⟦T⟧...⟦/T⟧` texto-base (caixa lateral na página); linhas que começam com `( )` ou `I.`/`II.` viram itens; o comando ("assinale...", "Está correto o que se afirma em") fica sozinho no fim. Alternativas: sem prefixo "a)", sem hífen partido de quebra de linha (`bem-estar`, `recém-nascido`).
+  A página (`qf()` + CSS `.stem .qtext`, `.qi`) renderiza isso. Verificação: texto não pode ser perdido (comparar sem espaços e marcadores). Ao importar novo caderno, rodar `fmt_check` e olhar uma amostra antes de gravar no banco. Casos que o formatador não resolve: poema com versos (quebras de verso perdidas no PDF) e texto-base com várias partes sem cabeçalho.
+
 ## 4. Uso e direitos autorais
 - DECISÃO DO ROMERO (21/11/2026): desistiu de comercializar. A plataforma é só de uso pessoal. Regras de venda (marca, logo, selo FGV,
   aviso de curso independente) deixam de ser obrigatórias, mas não inventar vínculo oficial com a HU Brasil ou a FGV.
