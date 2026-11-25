@@ -32,6 +32,8 @@ Estas regras valem para qualquer sessão futura. Ler antes de mexer.
 - Questão com sublinhado, destaque, sobrescrito ou imagem NUNCA é excluída: preservar a marcação (ver seção 5). Ao reimportar, também recuperar as que foram excluídas antes: imagens e marcações entram por `tecK/patch.json` (`{tid:{img,s,o}}`), sem mudar ids.
 - Material complementar de curso (Missão Aprovação 2027): vira "Julgue os itens" (campo `jg` nas aulas, docs `aulas/jg1`, `jg2`). Os gabaritos do PDF vinham em branco; os veredictos e as correções são de autoria do Claude e só entram quando há confiança. Atualizações de 2026 são verificadas em fonte primária antes de entrar: baixar o PDF oficial (gov.br, DOU, CONASS) e extrair com `pdftotext -layout`; o WebFetch não lê PDF, mas o harness salva o arquivo em `tool-results/`. Já conferidos: Portarias GM/MS 11.211 e 12.508/2026, Nota Técnica 5/2026 (isolamento), PCDT de DM2 e de acidentes escorpiônicos 2026, 5ª Definição Universal de IAM, SBC 2026 (IC), SSC 2026, AHA/ASA 2026 (AVC).
 
+- Raio-X da banca (após responder): tipo de comando, palavras absolutas, dados reais do banco (posição do gabarito equilibrada; absoluta certa ~15% vs acaso 20%; mais longa ~24%) e, por IA, o tipo de pegadinha de cada alternativa errada. Conta no navegador quais pegadinhas mais enganam o Romero. Não vender como "hack": os sinais estatísticos são fracos.
+
 ## 4. Uso e direitos autorais
 - DECISÃO DO ROMERO (21/11/2026): desistiu de comercializar. A plataforma é só de uso pessoal. Regras de venda (marca, logo, selo FGV,
   aviso de curso independente) deixam de ser obrigatórias, mas não inventar vínculo oficial com a HU Brasil ou a FGV.
