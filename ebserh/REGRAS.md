@@ -38,6 +38,8 @@ Estas regras valem para qualquer sessão futura. Ler antes de mexer.
   Convenções do campo `s`: `\n` quebra de linha; `\n\n` novo parágrafo; `⟦T⟧...⟦/T⟧` texto-base (caixa lateral na página); linhas que começam com `( )` ou `I.`/`II.` viram itens; o comando ("assinale...", "Está correto o que se afirma em") fica sozinho no fim. Alternativas: sem prefixo "a)", sem hífen partido de quebra de linha (`bem-estar`, `recém-nascido`).
   A página (`qf()` + CSS `.stem .qtext`, `.qi`) renderiza isso. Verificação: texto não pode ser perdido (comparar sem espaços e marcadores). Ao importar novo caderno, rodar `fmt_check` e olhar uma amostra antes de gravar no banco. Casos que o formatador não resolve: poema com versos (quebras de verso perdidas no PDF) e texto-base com várias partes sem cabeçalho.
 
+- Progresso salvo sempre (regra obrigatória): tudo que o Romero conclui (etapas, aulas, questões, simulados, revisões, Julgue os itens, pegadinhas) vai para `data/users/<uid>/rota` e `banco`, com cópia no navegador. `S.evo` guarda um retrato diário do edital (dominados/estudados). O painel "Sua evolução" (Desempenho) mostra sequência, semanas, curva e linha do tempo. Novo recurso de estudo deve chamar `persist()`/`bsave()`.
+
 ## 4. Uso e direitos autorais
 - DECISÃO DO ROMERO (21/11/2026): desistiu de comercializar. A plataforma é só de uso pessoal. Regras de venda (marca, logo, selo FGV,
   aviso de curso independente) deixam de ser obrigatórias, mas não inventar vínculo oficial com a HU Brasil ou a FGV.
